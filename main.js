@@ -42,7 +42,7 @@ function updateState(id, obj, value) {
     let f = parseFloat(value);
     if (f.toString() === value) value = f;
 
-    if (obj.native.factor !== 'undefined') {
+    if (obj.native.factor !== undefined) {
         value *= obj.native.factor;
     }
 
@@ -75,7 +75,7 @@ function connect() {
                     for (var s in result.devices[device].status) {
                         if (!result.devices[device].status.hasOwnProperty(s)) continue;
                         var _obj = result.devices[device].status[s];
-                        (function (ss) {
+                        (function (ss) { 
                             adapter.getObject('devices.' + device  + '.' + ss, function (err, obj) {
                                 if (!obj) {
                                     obj = result.devices[device].status[ss];
