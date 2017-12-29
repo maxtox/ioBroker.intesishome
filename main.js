@@ -75,15 +75,15 @@ function connect() {
                     for (var s in result.devices[device].status) {
                         if (!result.devices[device].status.hasOwnProperty(s)) continue;
                         var _obj = result.devices[device].status[s];
-                        (function (ss) { 
-                            adapter.getObject('devices.' + device  + '.' + ss, function (err, obj) {
+                        (function (ss, __obj) {
+                            adapter.getObject('devices.' + device  + '.' + (__obj.obj.common.name || ss), function (err, obj) {
                                 if (!obj) {
                                     obj = result.devices[device].status[ss];
                                     obj.obj.type = 'state';
-                                    adapter.setObject('devices.' + device + '.' + (obj.obj.common.name || ss), obj.obj);
+                                    adapter.setObject('devices.' + device + '.' + (__obj.obj.common.name || ss), obj.obj);
                                 }
                             });
-                        })(s);
+                        })(s, _obj);
                         updateState('devices.' + device  + '.' + (_obj.obj.common.name || s), _obj.obj, _obj.val);
                     }
                 }
