@@ -93,6 +93,7 @@ function connect() {
                 ip:     result.ip,
                 port:   result.port,
                 token:  result.token,
+                log:    adapter.log
             };
 
             opts.onConnect = function (isConnected) {
