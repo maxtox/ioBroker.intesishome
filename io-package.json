@@ -1,36 +1,41 @@
 {
     "common": {
         "name": "intesishome",
-        "version": "0.5.0",
+        "version": "0.1.0",
         "news": {
-            "0.5.0": {
-                "en": "beta version",
-                "de": "Betaversion",
-                "ru": "Бета версия",
-                "pt": "Versão beta",
-                "fr": "Version bêta",
-                "nl": "Beta versie"
-            },
             "0.0.1": {
-                "en": "initial adapter",
-                "de": "Initiale Version",
-                "ru": "Первоначальный адаптер",
-                "pt": "Versão inicial",
-                "fr": "Version initiale",
-                "nl": "Eerste release"
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial"
             }
         },
-        "title": "Javascript/Node.js based intesishome adapter",
+        "title": {
+            "en": "Intesishome cloud",
+            "de": "Intesishome cloud",
+            "ru": "Intesishome cloud",
+            "pt": "Intesishome cloud",
+            "nl": "Intesishome cloud",
+            "fr": "Intesishome cloud",
+            "it": "Intesishome cloud",
+            "es": "Intesishome cloud"
+        },
         "desc": {
-            "en": "ioBroker intesishome Adapter",
-            "de": "ioBroker Intesishome Adapter",
-            "ru": "ioBroker Intesishome драйвер как образец",
-            "pt": "Modelo de adaptador para o ioBroker",
-            "fr": "ioBroker adaptateur modèle",
-            "nl": "ioBroker Intesishome Adapter"
+            "en": "Read and control air condition and heat pumps via intesishome cloud",
+            "de": "Lesen und steuern Sie Klimaanlagen und Wärmepumpen über eine interessante Cloud",
+            "ru": "Прочитайте и контролируйте кондиционирование воздуха и тепловые насосы через обычное облако",
+            "pt": "Leia e controle o ar e as bombas de calor através de uma nuvem intesishome",
+            "nl": "Leest en controleert de luchttoestand en warmtepompen via een intesishome wolk",
+            "fr": "Lire et contrôler l'état de l'air et les pompes à chaleur via intesishome cloud",
+            "it": "Leggi e controlla le condizioni dell'aria e le pompe di calore tramite una nuvola intesishome",
+            "es": "Lea y controle el aire acondicionado y las bombas de calor a través de la nube intesishome"
         },
         "authors": [
-            "my Name <my@email.com>"
+            "maxtox <maxtox@gmx.de>"
         ],
         "platform": "Javascript/Node.js",
         "mode": "daemon",

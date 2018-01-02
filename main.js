@@ -15,21 +15,48 @@ const intesis = require('./lib/intesishome');
 
 const adapter = utils.adapter('intesishome');
 let connectTimeout;
+let isConnected;
+let client;
 
-// is called if a subscribed object changes
-adapter.on('objectChange', function (id, obj) {
-    // Warning, obj can be null if it was deleted
-    adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
-});
+const COMMAND_MAP = {
+    power:      1,
+    mode:       2,
+    fan_speed:  4,
+    vvane:      5,
+    hvane:      6,
+    setpoint:   9
+};
 
 // is called if a subscribed state changes
 adapter.on('stateChange', function (id, state) {
-    // Warning, state can be null if it was deleted
-    adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
-
-    // you can use the ack flag to detect if it is status (true) or command (false)
     if (state && !state.ack) {
-        adapter.log.info('ack is not set!');
+        setImmediate(() => {
+            adapter.getObject(id, function (err, obj) {
+                if (obj && obj.common) {
+                    if (!obj.common.write) {
+                        adapter.log.error('Cannot write read only object: ' + id);
+                    } else {
+                        if (!isConnected || !client) {
+                            adapter.log.error('Cannot write "' + id + '" because not connected');
+                        } else {
+                            let parts = id.split('.');
+                            let deviceId = parts[parts.length - 2];
+                            if (obj.native.uid === COMMAND_MAP.power) {
+                                intesis.setPower(client, deviceId, state.val);
+                            } else if (obj.native.uid === COMMAND_MAP.fan_speed) {
+                                intesis.setFanSpeed(client, deviceId, state.val);
+                            } else if (obj.native.uid === COMMAND_MAP.setpoint) {
+                                intesis.setSetPoint(client, deviceId, state.val);
+                            } else {
+                                adapter.log.warn('Unknown set variable: ' + id);
+                            }
+                        }
+                    }
+                } else {
+                    adapter.log.error('Unknown state: ' + id);
+                }
+            });
+        });
     }
 });
 
@@ -43,8 +70,11 @@ function updateState(id, obj, value) {
     let f = parseFloat(value);
     if (f.toString() === value) value = f;
 
-    if (obj.native.factor !== undefined) {
+    if (obj && obj.native.factor !== undefined) {
         value *= obj.native.factor;
+    }
+    if (id.match(/\.POWER_ON_OFF$/)) {
+        value = !!value;
     }
 
     adapter.setForeignState(adapter.namespace + '.' + id, value, true);
@@ -79,9 +109,9 @@ function connect() {
                     });
 
                     // create states
-                    for (var s in result.devices[device].status) {
+                    for (let s in result.devices[device].status) {
                         if (!result.devices[device].status.hasOwnProperty(s)) continue;
-                        var _obj = result.devices[device].status[s];
+                        let _obj = result.devices[device].status[s];
                         (function (ss, __obj) {
                             adapter.getForeignObject(adapter.namespace + '.devices.' + device  + '.' + (__obj.obj._id || ss), function (err, obj) {
                                 if (!obj) {
@@ -104,7 +134,8 @@ function connect() {
                 log:    adapter.log
             };
 
-            opts.onConnect = function (isConnected) {
+            opts.onConnect = function (_isConnected) {
+                isConnected = _isConnected;
                 adapter.log.debug('Connected: ' + isConnected);
                 adapter.setState('info.connection', isConnected, true);
                 if (!isConnected && !connectTimeout) {
@@ -118,7 +149,7 @@ function connect() {
             opts.onError = function (error) {
                 adapter.log.error(error);
                 adapter.setState('info.connection', false, true);
-
+                isConnected = false;
                 if (!connectTimeout) {
                     connectTimeout = setTimeout(connect, adapter.config.reconnectTimeout || 10000);
                 }
@@ -133,11 +164,12 @@ function connect() {
             }
 
             // try to create TCP connection
-            intesis.createConnection(opts);
+            client = intesis.createConnection(opts);
         }
     });
 }
 function main() {
     adapter.setState('info.connection', false, true);
+    adapter.subscribeForeignStates(adapter.namespace + '.devices.*');
     connect();
 }

@@ -11,12 +11,12 @@ It includes both code running within iobroker and as vis widget. If you only pla
 ## Changelog
 
 #### 0.2.0
-* (bluefox) initial release
+* (maxtox) initial release
 
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2017 Maxtox <maxtox@gmx.de>
+Copyright (c) 2017-2018 Maxtox <maxtox@gmx.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
