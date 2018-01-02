@@ -18,15 +18,6 @@ let connectTimeout;
 let isConnected;
 let client;
 
-const COMMAND_MAP = {
-    power:      1,
-    mode:       2,
-    fan_speed:  4,
-    vvane:      5,
-    hvane:      6,
-    setpoint:   9
-};
-
 // is called if a subscribed state changes
 adapter.on('stateChange', function (id, state) {
     if (state && !state.ack) {
@@ -41,14 +32,12 @@ adapter.on('stateChange', function (id, state) {
                         } else {
                             let parts = id.split('.');
                             let deviceId = parts[parts.length - 2];
-                            if (obj.native.uid === COMMAND_MAP.power) {
-                                intesis.setPower(client, deviceId, state.val);
-                            } else if (obj.native.uid === COMMAND_MAP.fan_speed) {
-                                intesis.setFanSpeed(client, deviceId, state.val);
-                            } else if (obj.native.uid === COMMAND_MAP.setpoint) {
-                                intesis.setSetPoint(client, deviceId, state.val);
+                            if (obj.common.type === 'boolean') {
+                                intesis.setBoolean(client, deviceId, obj.native.uid, state.val);
+                            } else if (obj.common.type === 'number') {
+                                intesis.setInteger(client, deviceId, obj.native.uid, state.val);
                             } else {
-                                adapter.log.warn('Unknown set variable: ' + id);
+                                intesis.setState(client, deviceId, obj.native.uid, state.val);
                             }
                         }
                     }
@@ -75,6 +64,10 @@ function updateState(id, obj, value) {
     }
     if (id.match(/\.POWER_ON_OFF$/)) {
         value = !!value;
+    } else if (obj && obj.native && obj.native.states) {
+        if (obj.native.states.hasOwnProperty(value)) {
+            value = obj.native.states[value];
+        }
     }
 
     adapter.setForeignState(adapter.namespace + '.' + id, value, true);
