@@ -14,6 +14,7 @@ const utils   = require('./lib/utils');
 const intesis = require('./lib/intesishome');
 
 const adapter = utils.adapter('intesishome');
+let connectTimeout;
 
 // is called if a subscribed object changes
 adapter.on('objectChange', function (id, obj) {
@@ -46,10 +47,15 @@ function updateState(id, obj, value) {
         value *= obj.native.factor;
     }
 
-    adapter.setState(id, value, true);
+    adapter.setForeignState(adapter.namespace + '.' + id, value, true);
 }
 
 function connect() {
+    if (connectTimeout) {
+        clearTimeout(connectTimeout);
+        connectTimeout = null;
+    }
+
     adapter.config.log = adapter.log;
     intesis.getStatus(adapter.config, function (err, result) {
         if (err) {
@@ -58,7 +64,7 @@ function connect() {
             for (let device in result.devices) {
                 if (result.devices.hasOwnProperty(device)) {
                     // create channel
-                    adapter.getObject('devices.' + device, function (err, obj) {
+                    adapter.getForeignObject(adapter.namespace + '.devices.' + device, function (err, obj) {
                         if (!obj) {
                             obj = {
                                 _id: device,
@@ -68,22 +74,24 @@ function connect() {
                                 type: 'channel',
                                 native: result.devices[device]
                             };
-                            adapter.setObject('devices.' + device, obj);
+                            adapter.setForeignObject(adapter.namespace + '.devices.' + device, obj);
                         }
                     });
+
                     // create states
                     for (var s in result.devices[device].status) {
                         if (!result.devices[device].status.hasOwnProperty(s)) continue;
                         var _obj = result.devices[device].status[s];
                         (function (ss, __obj) {
-                            adapter.getObject('devices.' + device  + '.' + (__obj.obj.common.name || ss), function (err, obj) {
+                            adapter.getForeignObject(adapter.namespace + '.devices.' + device  + '.' + (__obj.obj._id || ss), function (err, obj) {
                                 if (!obj) {
                                     obj = result.devices[device].status[ss];
                                     obj.obj.type = 'state';
-                                    adapter.setObject('devices.' + device + '.' + (__obj.obj.common.name || ss), obj.obj);
+                                    adapter.setForeignObject(adapter.namespace + '.devices.' + device + '.' + (__obj.obj._id || ss), obj.obj);
                                 }
                             });
                         })(s, _obj);
+
                         updateState('devices.' + device  + '.' + (_obj.obj.common.name || s), _obj.obj, _obj.val);
                     }
                 }
@@ -99,14 +107,32 @@ function connect() {
             opts.onConnect = function (isConnected) {
                 adapter.log.debug('Connected: ' + isConnected);
                 adapter.setState('info.connection', isConnected, true);
+                if (!isConnected && !connectTimeout) {
+                    connectTimeout = setTimeout(connect, adapter.config.reconnectTimeout || 10000);
+                }
+                if (isConnected && connectTimeout) {
+                    clearTimeout(connectTimeout);
+                    connectTimeout = null;
+                }
             };
             opts.onError = function (error) {
                 adapter.log.error(error);
-                setTimeout(connect, adapter.config.reconnectTimeout || 10000);
+                adapter.setState('info.connection', false, true);
+
+                if (!connectTimeout) {
+                    connectTimeout = setTimeout(connect, adapter.config.reconnectTimeout || 10000);
+                }
             };
             opts.onData = function (deviceId, id, value, obj) {
                 updateState('devices.' + deviceId + '.' + id, obj, value);
             };
+
+            // start timer if server does not response
+            if (!connectTimeout) {
+                connectTimeout = setTimeout(connect, adapter.config.reconnectTimeout || 10000);
+            }
+
+            // try to create TCP connection
             intesis.createConnection(opts);
         }
     });
