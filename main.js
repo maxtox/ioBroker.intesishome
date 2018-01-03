@@ -62,6 +62,11 @@ function updateState(id, obj, value) {
     if (obj && obj.native.factor !== undefined) {
         value *= obj.native.factor;
     }
+    //Temperature shows 32768 if it is not connected or missing
+    if (obj && value === 32768) {
+        value *= 0;
+    }
+
     if (id.match(/\.POWER_ON_OFF$/)) {
         value = !!value;
     } else if (obj && obj.native && obj.native.states) {
