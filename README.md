@@ -10,7 +10,7 @@ It includes both code running within iobroker and as vis widget. If you only pla
 
 ## Changelog
 
-#### 0.2.0
+#### 0.1.1
 * (maxtox) initial release
 
 ## License

@@ -1,6 +1,6 @@
 {
   "name": "iobroker.intesishome",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ioBroker intesishome Adapter",
   "author": {
     "name": "Maxtox",
@@ -12,7 +12,7 @@
       "email": "maxtox@gmx.de"
     }
   ],
-  "homepage": "https://github.com/ioBroker/ioBroker.intesishome",
+  "homepage": "https://github.com/maxtox/ioBroker.intesishome",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -22,16 +22,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ioBroker/ioBroker.intesishome"
+    "url": "https://github.com/maxtox/ioBroker.intesishome"
   },
   "dependencies": {},
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-replace": "^1.0.1",
-    "grunt-contrib-jshint": "^1.1.0",
-    "grunt-jscs": "^3.0.1",
-    "grunt-http": "^2.2.0",
-    "mocha": "^3.5.3",
+    "gulp": "^3.9.1",
+    "mocha": "^4.1.0",
     "chai": "^4.1.2"
   },
   "main": "main.js",
@@ -39,7 +35,7 @@
     "test": "node node_modules/mocha/bin/mocha"
   },
   "bugs": {
-    "url": "https://github.com/ioBroker/ioBroker.intesishome/issues"
+    "url": "https://github.com/maxtox/ioBroker.intesishome/issues"
   },
   "readmeFilename": "README.md"
 }
