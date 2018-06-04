@@ -2,9 +2,12 @@
 # ioBroker.intesishome
 =================
 
-Place here the description!
+[![Build Status](https://travis-ci.org/maxtox/ioBroker.intesishome.svg?branch=master)](https://travis-ci.org/ioBroker/ioBroker.ical)
+[![NPM version](http://img.shields.io/npm/v/iobroker.intesishome.svg)](https://www.npmjs.com/package/iobroker.intesishome)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.intesishome.svg)](https://www.npmjs.com/package/iobroker.intesishome)
+[![Github Issues](http://githubbadges.herokuapp.com/maxtox/ioBroker.intesishome/issues.svg)](https://github.com/maxtox/ioBroker.intesishome/issues)
 
-## Steps 
+Place here the description!
 
 ## Changelog
 
