@@ -1,0 +1,64 @@
+<html>
+
+<!-- these 4 files always have to be included -->
+<link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
+<script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+<script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+<script type="text/javascript" src="../../js/translate.js"></script>
+<script type="text/javascript" src="../../js/adapter-settings.js"></script>
+<script type="text/javascript" src="words.js"></script>
+
+<script type="text/javascript">
+
+    function load(settings, onChange) {
+       if (!settings) return;
+        $('.value').each(function () {
+            var $key = $(this);
+            var id = $key.attr('id');
+            if ($key.attr('type') === 'checkbox') {
+                $key.prop('checked', settings[id]).change(function() {
+                    onChange();
+                });
+            } else {
+                $key.val(settings[id]).change(function() {
+                    onChange();
+                }).keyup(function() {
+                    onChange();
+                });
+            }
+        });
+        onChange(false);
+    }
+
+    function save(callback) {
+        var obj = {};
+        $('.value').each(function () {
+            var $this = $(this);
+			if ($this.attr('type') === 'checkbox') {
+				obj[$this.attr('id')] = $this.prop('checked');
+			} else {
+				obj[$this.attr('id')] = $this.val();
+			}
+        });
+        callback(obj);
+    }
+</script>
+
+<!-- you have to put your config page in a div with id adapter-container -->
+<div id="adapter-container">
+
+    <table><tr>
+        <td><img src="intesishome.png"/></td>
+        <td><h3 class="translate">intesishome adapter settings</h3></td>
+    </tr></table>
+    <p>
+        <span><label for="username" class="translate">username</label></span><input class="value" id="username"/><br>
+        <span><label for="password" class="translate">Password</label></span><input class="value" id="password" type="password"/><br>
+        <span><label for="passwordRepeat" class="translate">Password repeat</label></span><input id="passwordRepeat" type="password"/><br>
+    </p>
+</div>
+
+</html>

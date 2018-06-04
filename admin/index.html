@@ -1,13 +1,14 @@
 <html>
-
-<!-- these 4 files always have to be included -->
-<link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
-<script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
-<script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
-
+<head>
+<!-- Materialze style -->
 <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+<link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
+
+<script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+
 <script type="text/javascript" src="../../js/translate.js"></script>
+<script type="text/javascript" src="../../lib/js/materialize.js"></script>
 <script type="text/javascript" src="../../js/adapter-settings.js"></script>
 <script type="text/javascript" src="words.js"></script>
 
@@ -46,19 +47,34 @@
         callback(obj);
     }
 </script>
-
-<!-- you have to put your config page in a div with id adapter-container -->
-<div id="adapter-container">
-
-    <table><tr>
-        <td><img src="intesishome.png"/></td>
-        <td><h3 class="translate">intesishome adapter settings</h3></td>
-    </tr></table>
-    <p>
-        <span><label for="username" class="translate">username</label></span><input class="value" id="username"/><br>
-        <span><label for="password" class="translate">Password</label></span><input class="value" id="password" type="password"/><br>
-        <span><label for="passwordRepeat" class="translate">Password repeat</label></span><input id="passwordRepeat" type="password"/><br>
-    </p>
-</div>
-
+</head>
+<body>
+    <div class="m adapter-container">
+        <div class="row">
+            <div class="row">
+                <div class="col s12 m4 l2">
+                    <img src="intesishome.png" class="logo">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 m4">
+                    <input class="value" id="username"/>
+                    <label for="username" class="translate">username</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 m4">
+                    <input class="value" id="password" type="password"/>
+                    <label for="password" class="translate">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 m4">
+                    <input id="passwordRepeat" type="password"/>
+                    <label for="passwordRepeat" class="translate">Password repeat</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

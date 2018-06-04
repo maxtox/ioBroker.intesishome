@@ -40,6 +40,7 @@
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "intesishome.png",
+        "materialize": true,
         "extIcon": "https://raw.githubusercontent.com/maxtox/ioBroker.intesishome/master/admin/intesishome.png",
         "keywords": ["intesishome", "vis", "GUI", "graphical", "scada"],
         "readme": "https://github.com/maxtox/ioBroker.intesishome/blob/master/README.md",
