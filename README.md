@@ -15,7 +15,7 @@ Support of intesishome cloud devices.
 
 ## Changelog
 
-### 0.1.2 (2018_06_04)
+### 0.1.3 (2018_06_04)
 * (maxtox) initial release
 
 ## License

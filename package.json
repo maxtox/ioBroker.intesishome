@@ -1,6 +1,6 @@
 {
   "name": "iobroker.intesishome", 
-  "version": "0.1.2", 
+  "version": "0.1.3",
   "description": "ioBroker intesishome Adapter",
   "author": {
     "name": "Maxtox",
