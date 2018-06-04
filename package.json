@@ -1,5 +1,5 @@
 {
-  "name": "iobroker.intesishome",
+  "name": "iobroker.intesishome", 
   "version": "0.1.1",
   "description": "ioBroker intesishome Adapter",
   "author": {
