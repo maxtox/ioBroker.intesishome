@@ -40,13 +40,11 @@
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "intesishome.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.intesishome/master/admin/intesishome.png",
+        "extIcon": "https://raw.githubusercontent.com/maxtox/ioBroker.intesishome/master/admin/intesishome.png",
         "keywords": ["intesishome", "vis", "GUI", "graphical", "scada"],
-        "readme": "https://github.com/ioBroker/ioBroker.intesishome/blob/master/README.md",
+        "readme": "https://github.com/maxtox/ioBroker.intesishome/blob/master/README.md",
         "loglevel": "info",
-        "type": "general",
-        "restartAdapters": ["vis"]
+        "type": "climate-control"
     },
     "native": {
         "username": "",
