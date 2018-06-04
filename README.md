@@ -9,7 +9,8 @@
 
 Support of intesishome cloud devices.
 
-🇩🇪[Deutsche Beschreibung](docs/de/index.md)
+[Deutsche Beschreibung](docs/de/index.md)
+
 [English description](docs/en/index.md)
 
 ## Changelog
