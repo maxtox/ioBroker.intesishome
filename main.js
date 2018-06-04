@@ -59,8 +59,13 @@ function updateState(id, obj, value) {
     let f = parseFloat(value);
     if (f.toString() === value) value = f;
 
-    if (obj && obj.native.factor !== undefined) {
-        value *= obj.native.factor;
+    if (obj) {
+        if (obj.native.factor !== undefined) {
+            if (obj && value > 64000) {
+                value = -(65536 - value);
+            }
+            value *= obj.native.factor;
+        }
     }
     //Temperature shows 32768 if it is not connected or missing
     if (obj && value === 32768) {
