@@ -1,8 +1,8 @@
-dann können Sie folgende Datenpunkte sehen:
+then you can see the following data points:
 
 ![](../img/3.png)
 
-und folgende Punkte müssen/ können noch benannt/definiert werden:
+and the following points must / can still be named / defined:
 
 ![](../img/4.png)
 
@@ -10,23 +10,22 @@ und folgende Punkte müssen/ können noch benannt/definiert werden:
 
 ![](../img/6.png)
 
-mit diesem Adapter und dieser Hardware:
+with this adapter and this hardware:
 
 ![](../img/universal_controller_intesis_home.jpg)
 
-oder
+or
 
 ![](../img/5818ab18e790edc8928a6006cca4aad9.jpg)
 
-können Sie Klimaanlagen Air Conditioner oder Wärmepumpen(Heatpump) mit dem ioBroker bedienen und kontrollieren.
+You can operate and control air conditioners, air conditioners or heat pumps (heat pump) with the ioBroker.
 
-Bitte installieren Sie es (über GitHub), testen Sie es und berichten über Ihre Erfolge  :D 
+Please install it (via GitHub), test it and report on your achievements: D
 
-Folgende Hersteller werden unterstützt:
+The following manufacturers are supported:
 
-(ich nutze die Aquarea Geisha WH-MDC05F3E5), die Infos dazu hier http://aquarea.smallsolutions.de
-geht aber auch mit MXC09G3E8, WH-MXC12D9E8, WH-SDC(SDF)03E3E5 und folgenden
-
+(I use the Aquarea Geisha WH-MDC05F3E5), the info here http://aquarea.smallsolutions.de
+but synonymous with MXC09G3E8, WH-MXC12D9E8, WH-SDC (SDF) 03E3E5 and following
 ![](../img/1.png)
 
 ![](../img/2.png)

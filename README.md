@@ -7,7 +7,10 @@
 [![Downloads](https://img.shields.io/npm/dm/iobroker.intesishome.svg)](https://www.npmjs.com/package/iobroker.intesishome)
 [![Github Issues](http://githubbadges.herokuapp.com/maxtox/ioBroker.intesishome/issues.svg)](https://github.com/maxtox/ioBroker.intesishome/issues)
 
-Place here the description!
+Support of intesishome cloud devices.
+
+🇩🇪[Deutsche Beschreibung](docs/de/index.md)
+[English description](docs/en/index.md)
 
 ## Changelog
 
