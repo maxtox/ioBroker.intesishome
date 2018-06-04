@@ -2,15 +2,13 @@
 # ioBroker.intesishome
 =================
 
-This adapter is a intesishome for the creation of an ioBroker adapter. You do not need it at least that you plan developing your own adapter.
+Place here the description!
 
-It includes both code running within iobroker and as vis widget. If you only plan to create a vis widget then you should use the [iobroker.vis-intesishome](https://github.com/ioBroker/ioBroker.vis-intesishome) instead.
-
-##Steps 
+## Steps 
 
 ## Changelog
 
-#### 0.1.1
+### 0.1.2 (2018_06_04)
 * (maxtox) initial release
 
 ## License

@@ -17,6 +17,7 @@ const adapter = utils.adapter('intesishome');
 let connectTimeout;
 let isConnected;
 let client;
+const FORBIDDEN_CHARS = /[\]\[*,;'"`<>\\\s?]/g;
 
 // is called if a subscribed state changes
 adapter.on('stateChange', function (id, state) {
@@ -90,24 +91,26 @@ function connect() {
     }
 
     adapter.config.log = adapter.log;
-    intesis.getStatus(adapter.config, function (err, result) {
+    intesis.getStatus(adapter.config, (err, result) => {
         if (err) {
             console.error(err);
         } else {
             for (let device in result.devices) {
                 if (result.devices.hasOwnProperty(device)) {
+                    const deviceId = device.replace(FORBIDDEN_CHARS, '_');
+
                     // create channel
-                    adapter.getForeignObject(adapter.namespace + '.devices.' + device, function (err, obj) {
+                    adapter.getForeignObject(adapter.namespace + '.devices.' + deviceId, (err, obj) => {
                         if (!obj) {
                             obj = {
-                                _id: device,
+                                _id: 'devices.' + deviceId,
                                 common: {
                                     name: device
                                 },
                                 type: 'channel',
                                 native: result.devices[device]
                             };
-                            adapter.setForeignObject(adapter.namespace + '.devices.' + device, obj);
+                            adapter.setForeignObject(adapter.namespace + '.devices.' + deviceId, obj);
                         }
                     });
 
@@ -115,17 +118,18 @@ function connect() {
                     for (let s in result.devices[device].status) {
                         if (!result.devices[device].status.hasOwnProperty(s)) continue;
                         let _obj = result.devices[device].status[s];
-                        (function (ss, __obj) {
-                            adapter.getForeignObject(adapter.namespace + '.devices.' + device  + '.' + (__obj.obj._id || ss), function (err, obj) {
+                        const id = (_obj.obj._id || ss).toString().replace(FORBIDDEN_CHARS, '_');
+                        (function (ss, __obj, _id) {
+                            adapter.getForeignObject(adapter.namespace + '.devices.' + deviceId  + '.' + _id, (err, obj) => {
                                 if (!obj) {
                                     obj = result.devices[device].status[ss];
                                     obj.obj.type = 'state';
-                                    adapter.setForeignObject(adapter.namespace + '.devices.' + device + '.' + (__obj.obj._id || ss), obj.obj);
+                                    adapter.setForeignObject(adapter.namespace + '.devices.' + deviceId + '.' + _id, obj.obj);
                                 }
                             });
-                        })(s, _obj);
+                        })(s, _obj, id);
 
-                        updateState('devices.' + device  + '.' + (_obj.obj.common.name || s), _obj.obj, _obj.val);
+                        updateState('devices.' + deviceId  + '.' + id, _obj.obj, _obj.val);
                     }
                 }
             }
@@ -158,7 +162,7 @@ function connect() {
                 }
             };
             opts.onData = function (deviceId, id, value, obj) {
-                updateState('devices.' + deviceId + '.' + id, obj, value);
+                updateState('devices.' + deviceId.toString().replace(FORBIDDEN_CHARS, '_') + '.' + id.toString(FORBIDDEN_CHARS, '_'), obj, value);
             };
 
             // start timer if server does not response
