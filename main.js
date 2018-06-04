@@ -13,7 +13,7 @@
 const utils   = require('./lib/utils');
 const intesis = require('./lib/intesishome');
 
-const adapter = utils.adapter('intesishome');
+const adapter = new utils.Adapter('intesishome');
 let connectTimeout;
 let isConnected;
 let client;
