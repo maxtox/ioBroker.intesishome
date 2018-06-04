@@ -1,4 +1,4 @@
-then you can see the following data points:
+You can extract ollowing data points:
 
 ![](../img/3.png)
 
@@ -30,28 +30,28 @@ but synonymous with MXC09G3E8, WH-MXC12D9E8, WH-SDC (SDF) 03E3E5 and following
 
 ![](../img/2.png)
 
-RAC
-Domestic Lines
-AQUAREA
-ECO i
-ECO g
-PAC i
+* RAC
+* Domestic Lines
+* AQUAREA
+* ECO i
+* ECO g
+* PAC i
 
-Domestic
-Split & multisplit
-SKY
-VRV
+* Domestic
+* Split & multisplit
+* SKY
+* VRV
 
-Airstage (VRF)
+* Airstage (VRF)
 
-Commercial Line
-Multi V
+* Commercial Line
+* Multi V
 
-SR series
-FD series
-Hypermulti KX
-Domestic
-Split & multisplit
+* SR series
+* FD series
+* Hypermulti KX
+* Domestic
+* Split & multisplit
 
-DIGITAL
-VRF
+* DIGITAL
+* VRF
