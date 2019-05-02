@@ -1,11 +1,13 @@
 os:
   - linux
   - osx
+  - windows
 language: node_js
 node_js:
-  - '4'
   - '6'
   - '8'
+  - '10'
+  - '12'
 before_script:
   - npm install winston@2.3.1
   - 'npm install https://github.com/ioBroker/ioBroker.js-controller/tarball/master --production'
