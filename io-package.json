@@ -45,6 +45,7 @@
         "keywords": ["intesishome", "vis", "GUI", "graphical", "scada"],
         "readme": "https://github.com/maxtox/ioBroker.intesishome/blob/master/README.md",
         "loglevel": "info",
+        "license": "MIT",
         "type": "climate-control"
     },
     "native": {
