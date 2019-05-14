@@ -10,7 +10,7 @@
 'use strict';
 
 // you have to require the utils module and call adapter function
-const utils   = require('./lib/utils');
+const utils = require('@iobroker/adapter-core');
 const intesis = require('./lib/intesishome');
 
 const adapter = new utils.Adapter('intesishome');
